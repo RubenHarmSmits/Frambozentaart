@@ -38,14 +38,14 @@ def move_back():
 try:
     while True:
         infrared_proximity = BP.get_sensor(BP.PORT_3)
-        print(infrared_proximity, type(infrared_proximity))
+        # print(infrared_proximity, type(infrared_proximity))
 
-        if infrared_proximity < 50:  # if the touch sensor is pressed
+        if infrared_proximity < 50:
             speed = 50
             move_forward(speed)
             print("Moving forward ")
 
-        elif infrared_proximity > 49:  # else the touch sensor is not pressed or not configured, so set the speed to 0
+        elif infrared_proximity > 49:
             speed = 30
             turn_right(speed)
             print("Turning_right")
