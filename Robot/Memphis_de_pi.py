@@ -1,12 +1,12 @@
 from __future__ import print_function  # use python 3 syntax but make it compatible with python 2
 from __future__ import division  # ''
 
-import Robot
+
 import time  # import the time library for the sleep function
-#import .brickpi3  # import the BrickPi3 drivers
-from .Touch_sensor import Touch_sensor_class
-from .IR_Sensor import IR_Sensor
-from .Engine import Engine
+import brickpi3  # import the BrickPi3 drivers
+# from Touch_sensor import Touch_sensor_class
+from IR_Sensor import IR_Sensor
+from Engine import Engine
 
 
 # Configure for an EV3 color sensor.
@@ -18,53 +18,47 @@ from .Engine import Engine
 class Memphis_de_pi:
 
     def __init__(self):
-        self.my_Touch_Sensor = Touch_sensor_class()
+        # self.my_Touch_Sensor = Touch_sensor_class()
         self.my_IR_Sensor = IR_Sensor()
-        self.engine_Left = Engine()
-        self.engine_Right = Engine()
+        self.engine_Left = Engine(1)
+        self.engine_Right = Engine(2)
 
     def move_forward(self, speed):
+        print("Moving forward function is starting")
         self.engine_Left.change_speed(speed)
         self.engine_Right.change_speed(speed)
+        print("Moving forward function is finished")
 
-    def turn_right(self):
-        self.engine_Left.change_speed(50)
-        self.engine_Right.change_speed(-50)
+    def turn_right(self, speed):
+        self.engine_Left.change_speed(speed)
+        self.engine_Right.change_speed(-speed)
+    #
+    # def turn_left(self):
+    #     self.engine_Left.change_speed(-50)
+    #     self.engine_Right.change_speed(50)
 
-    def turn_left(self):
-        self.engine_Left.change_speed(-50)
-        self.engine_Right.change_speed(50)
+    def stop_move(self):
+        self.engine_Left.change_speed(0)
+        self.engine_Right.change_speed(0)
 
     def manage_move(self):
         while True:
-            if self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
-                self.turn_left()
-            elif not self.my_IR_Sensor.isTooClose():
-                self.turn_right()
-            elif not self.my_Touch_Sensor.get_signal() and not self.my_IR_Sensor.isTooClose():
-                self.move_forward(50)
-                self.time.sleep(0.02)
+    #         if self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
+    #             self.turn_left()
+    #         elif not self.my_IR_Sensor.isTooClose():
+    #             self.turn_right()
+    #         elif not self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
+    #             self.move_forward(50)
+    #
+            if not self.my_IR_Sensor.isTooClose():
+                self.turn_right(20)
+                print("Turning right")
+            elif self.my_IR_Sensor.isTooClose():
+                self.move_forward(20)
+                print("MOving forward")
+    #
+            self.time.sleep(0.02)
 
-# def turn_left(speed):
-#     print("turning left")
-#     BP.set_motor_power(BP.PORT_A, -speed)
-#     BP.set_motor_power(BP.PORT_D, speed)
-#
-# def turn_right(speed):
-#     print("turning left")
-#     BP.set_motor_power(BP.PORT_A, speed)
-#     BP.set_motor_power(BP.PORT_D, -speed)
-#
-# def move_forward(speed):
-#     print("moving forward")
-#     BP.set_motor_power(BP.PORT_A, speed)
-#     BP.set_motor_power(BP.PORT_D, speed)
-#
-# def move_back():
-#     print("moving back")
-#     BP.set_motor_power(BP.PORT_A, -50)
-#     BP.set_motor_power(BP.PORT_D, -50)
-#
 #
 # try:
 #     while True:
@@ -85,3 +79,12 @@ class Memphis_de_pi:
 #
 # except KeyboardInterrupt:
 #     BP.reset_all()
+
+memphis = Memphis_de_pi()
+
+try:
+    # memphis.move_forward(50)
+    memphis.manage_move()
+except KeyboardInterrupt:
+    memphis.stop_move()
+
