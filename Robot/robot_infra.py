@@ -40,12 +40,20 @@ try:
         infrared_proximity = BP.get_sensor(BP.PORT_3)
         # print(infrared_proximity, type(infrared_proximity))
 
+<<<<<<< HEAD
         if infrared_proximity < 50:  
+=======
+        if infrared_proximity < 50:
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
             speed = 50
             move_forward(speed)
             print("Moving forward ")
 
+<<<<<<< HEAD
         elif infrared_proximity >= 50: 
+=======
+        elif infrared_proximity > 49:
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
             speed = 30
             turn_right(speed)
             print("Turning_right")
