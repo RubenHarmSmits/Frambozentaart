@@ -1,15 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+  <component name="ChangeListManager">
+    <list default="true" id="4b1f1c96-8b31-41c7-9d1c-4d5fabe15177" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+=======
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/Robot/robot_infra.py" line="40" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1fc6d869-e759-4e8a-b1b9-333551bb4da8" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Robot/Engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot/Engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Robot/IR_Sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot/IR_Sensor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Robot/Memphis_de_pi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot/Memphis_de_pi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Robot/Touch_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot/Touch_sensor.py" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/Robot/robot_infra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Analog_Sensor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Analog_Sensors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/BrickPi3_Stack_Set_Address.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/DI-dGPS.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/DI-dPress.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/DI-dTIR.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/DI-dTemp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Color_Sensor_Color.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Color_Sensor_Multi_Mode.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Color_Sensor_Raw.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Gyro.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Infrared.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Infrared_Remote.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/EV3-Ultrasonic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LED.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Motor_DPS.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Motor_Encoder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Motor_Position.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Motor_Power.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Motor_Status.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Motors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/LEGO-Touch_Sensor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/NXT-Color_Sensor_Color.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/NXT-Color_Sensor_Red_LED.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/NXT-Light_Sensor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/NXT-Ultrasonic_Sensor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Read_Info.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Read_Voltages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Test_Connected.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/robot_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/robot_move.py" afterDir="false" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
+=======
+      <change afterPath="$PROJECT_DIR$/Robot/Engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Robot/IR_Sensor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Robot/Memphis_de_pi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Robot/Touch_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Robot/robot_infra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot/robot_infra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Robot/robot_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot/robot_move.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/robot_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/robot_move.py" afterDir="false" />
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
+>>>>>>> ca0f7f544c5e7ac4fd1b16fc117270eb2726ac79
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +69,17 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/brickpi3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="616">
+              <caret line="28" column="26" lean-forward="true" selection-start-line="27" selection-end-line="28" selection-end-column="26" />
+              <folding>
+                <element signature="e#326#332#0" expanded="true" />
+=======
   <component name="FUSProjectUsageTrigger">
     <session id="341324026">
       <usages-collector id="statistics.lifecycle.project">
@@ -112,7 +175,16 @@
             <state relative-caret-position="165">
               <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
               <folding>
+<<<<<<< HEAD
                 <marker date="1545227491333" expanded="true" signature="215:267" ph="..." />
+=======
+<<<<<<< HEAD
+                <element signature="e#1#98#0" expanded="true" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
+=======
+                <marker date="1545223944176" expanded="true" signature="198:249" ph="..." />
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
+>>>>>>> ca0f7f544c5e7ac4fd1b16fc117270eb2726ac79
               </folding>
             </state>
           </provider>
@@ -123,22 +195,42 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
+        <option value="Python Unit Test" />
+=======
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
         <option value="Python Script" />
       </list>
     </option>
   </component>
+<<<<<<< HEAD
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>get_sensor</find>
+    </findStrings>
+  </component>
+=======
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/examples/Robot_test.py" />
+        <option value="$PROJECT_DIR$/examples/Mock.py" />
+        <option value="$PROJECT_DIR$/Mock.py" />
+        <option value="$PROJECT_DIR$/brickpi3.py" />
+        <option value="$PROJECT_DIR$/Unit_test.py" />
+=======
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/robot_move.py" />
         <option value="$PROJECT_DIR$/robot_move_infra.py" />
         <option value="$PROJECT_DIR$/Robot/robot_move_infra.py" />
         <option value="$PROJECT_DIR$/Robot/robot_move.py" />
         <option value="$PROJECT_DIR$/Robot/robot_infra.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Robot/Touch_sensorclass.py" />
         <option value="$PROJECT_DIR$/Robot/ClassB.py" />
         <option value="$PROJECT_DIR$/Robot/__init__.py" />
@@ -147,14 +239,46 @@
         <option value="$PROJECT_DIR$/Robot/Engine.py" />
         <option value="$PROJECT_DIR$/Robot/Memphis_de_pi.py" />
         <option value="$PROJECT_DIR$/Robot/Touch_sensor.py" />
+=======
+<<<<<<< HEAD
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
+=======
+        <option value="$PROJECT_DIR$/Robot/Touch_sensor.py" />
+        <option value="$PROJECT_DIR$/Robot/IR_Sensor.py" />
+        <option value="$PROJECT_DIR$/Robot/Engine.py" />
+        <option value="$PROJECT_DIR$/Robot/Memphis_de_pi.py" />
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
+>>>>>>> ca0f7f544c5e7ac4fd1b16fc117270eb2726ac79
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="231" />
     <option name="y" value="56" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <option name="x" value="140" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="970" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+=======
+    <option name="x" value="553" />
+    <option name="y" value="27" />
+    <option name="width" value="1161" />
+    <option name="height" value="1000" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
+=======
+    <option name="x" value="1989" />
+    <option name="y" value="64" />
+>>>>>>> ca0f7f544c5e7ac4fd1b16fc117270eb2726ac79
     <option name="width" value="1144" />
     <option name="height" value="800" />
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -166,21 +290,31 @@
           <expand>
             <path>
               <item name="frambozentaart" type="b2602c69:ProjectViewProjectNode" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
               <item name="frambozentaart" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="frambozentaart" type="b2602c69:ProjectViewProjectNode" />
               <item name="frambozentaart" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+=======
+=======
               <item name="Robot" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="frambozentaart" type="b2602c69:ProjectViewProjectNode" />
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
             <path>
               <item name="frambozentaart" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
               <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
             </path>
           </expand>
           <select />
@@ -190,6 +324,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+=======
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$USER_HOME$/smerf" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -199,6 +336,7 @@
       <recent name="$PROJECT_DIR$/Test" />
       <recent name="$PROJECT_DIR$/Robot" />
     </key>
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -213,7 +351,11 @@
     </option>
   </component>
   <component name="RunManager">
+<<<<<<< HEAD
+    <configuration name="Unit_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+=======
     <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
       <module name="frambozentaart" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -221,11 +363,19 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+<<<<<<< HEAD
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Unit_test.py" />
+=======
       <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -236,7 +386,11 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
+        <item itemvalue="Python.Unit_test" />
+=======
         <item itemvalue="Python.scratch" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
       </list>
     </recent_temporary>
   </component>
@@ -245,6 +399,21 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
+      <changelist id="4b1f1c96-8b31-41c7-9d1c-4d5fabe15177" name="Default Changelist" comment="" />
+      <created>1545144623521</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545144623521</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20506634" />
+=======
       <changelist id="1fc6d869-e759-4e8a-b1b9-333551bb4da8" name="Default Changelist" comment="" />
       <created>1545134070094</created>
       <option name="number" value="Default" />
@@ -272,12 +441,25 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11639344" />
+=======
+<<<<<<< HEAD
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21420765" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17923497" />
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
+>>>>>>> ca0f7f544c5e7ac4fd1b16fc117270eb2726ac79
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32922733" />
+=======
       <window_info anchor="bottom" id="Run" order="2" weight="0.31027028" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -290,6 +472,49 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+<<<<<<< HEAD
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/examples/Robot_test.py" />
+    <entry file="file://$PROJECT_DIR$/examples/Mock.py" />
+    <entry file="file://$PROJECT_DIR$/examples/LEGO-Touch_Sensor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/EV3-Infrared.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Unit_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="74" selection-start-line="3" selection-start-column="74" selection-end-line="3" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brickpi3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="28" column="26" lean-forward="true" selection-start-line="27" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="e#326#332#0" expanded="true" />
+=======
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21420765" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -362,10 +587,15 @@
           <caret line="39" column="12" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="27" />
           <folding>
             <element signature="e#1#98#0" expanded="true" />
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
     <entry file="file://$PROJECT_DIR$/examples/LEGO-Motor_Power.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-90" />
@@ -390,6 +620,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Robot/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -408,6 +639,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Robot/IR_Sensor.py">
+=======
+>>>>>>> da4e02a5895f0bfed7cab98effe5ba939945a5fd
+    <entry file="file://$PROJECT_DIR$/Robot/robot_infra.py">
+>>>>>>> ca0f7f544c5e7ac4fd1b16fc117270eb2726ac79
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
@@ -457,5 +692,6 @@
         </state>
       </provider>
     </entry>
+>>>>>>> e532ce7d790e16f93c6ed7c382f561eb194c05e9
   </component>
 </project>
