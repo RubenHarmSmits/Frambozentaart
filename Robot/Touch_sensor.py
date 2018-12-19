@@ -1,7 +1,8 @@
-import brickpi3  # import the BrickPi3 drivers
+#import brickpi3  # import the BrickPi3 drivers
 
-signal = false
-class Touch_Sensor:
+class Touch_sensor_class:
+    def __init__(self):
+        self.signal = false
 
-    def get_signal():
-        return this.signal
+    def get_signal(self):
+        return self.signal

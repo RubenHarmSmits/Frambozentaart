@@ -1,48 +1,49 @@
 from __future__ import print_function  # use python 3 syntax but make it compatible with python 2
 from __future__ import division  # ''
 
+import Robot
 import time  # import the time library for the sleep function
-import brickpi3  # import the BrickPi3 drivers
-import Touch_Sensor
-import IR_Sensor
-import Engine
+#import .brickpi3  # import the BrickPi3 drivers
+from .Touch_sensor import Touch_sensor_class
+from .IR_Sensor import IR_Sensor
+from .Engine import Engine
 
 
 # Configure for an EV3 color sensor.
 # BP.set_sensor_type configures the BrickPi3 for a specific sensor.
 # BP.PORT_1 specifies that the sensor will be on sensor port 1.
 # BP.Sensor_TYPE.EV3_INFRARED_PROXIMITY specifies that the sensor will be an EV3 infrared sensor.
-my_Touch_Sensor = Touch_Sensor()
-my_IR_Sensor = IR_Sensor()
-engine_Left = Engine()
-engine_Right = Engine()
+
 
 class Memphis_de_pi:
 
     def __init__(self):
-        self.This_Touch_Sensor
+        self.my_Touch_Sensor = Touch_sensor_class()
+        self.my_IR_Sensor = IR_Sensor()
+        self.engine_Left = Engine()
+        self.engine_Right = Engine()
 
-    def move_forward(speed):
-        engine_Left.change_speed(speed)
-        engine_Right.change_speed(speed)
+    def move_forward(self, speed):
+        self.engine_Left.change_speed(speed)
+        self.engine_Right.change_speed(speed)
 
-    def turn_right():
-        engine_Left.change_speed(50)
-        engine_Right.change_speed(-50)
+    def turn_right(self):
+        self.engine_Left.change_speed(50)
+        self.engine_Right.change_speed(-50)
 
-    def turn_left():
-        engine_Left.change_speed(-50)
-        engine_Right.change_speed(50)
+    def turn_left(self):
+        self.engine_Left.change_speed(-50)
+        self.engine_Right.change_speed(50)
 
-    def manage_move():
+    def manage_move(self):
         while True:
-            if my_Touch_Sensor.get_signal() and my_IR_Sensor.isTooClose():
-                turn_left()
-            elif not my_IR_Sensor.isTooClose():
-                turn_right()
-            elif not my_Touch_Sensor.get_signal() and not my_IR_Sensor.isTooClose():
-                move_forward(50)
-                time.sleep(0.02)
+            if self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
+                self.turn_left()
+            elif not self.my_IR_Sensor.isTooClose():
+                self.turn_right()
+            elif not self.my_Touch_Sensor.get_signal() and not self.my_IR_Sensor.isTooClose():
+                self.move_forward(50)
+                self.time.sleep(0.02)
 
 # def turn_left(speed):
 #     print("turning left")
