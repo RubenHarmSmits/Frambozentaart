@@ -14,6 +14,6 @@ class Engine():
             self.portcode = BP.PORT_D
 
     def change_speed(self, target_speed):
-        print("CHanging speed in engine ")
+        # print("Changing speed in engine ")
         self.speed = target_speed
         BP.set_motor_power(self.portcode, self.speed)

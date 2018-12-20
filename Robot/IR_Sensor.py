@@ -11,10 +11,11 @@ class IR_Sensor:
 
     def isTooClose(self):
         self.update_signal()
-        # print(self.signal)
-        if self.signal < 80:
+        if self.signal < 60:
+            print("Infra signal: %s" % (str(self.signal)))
             return True
-        elif self.signal > 79:
+        elif self.signal > 59:
+            print("Infra signal: %s" % (str(self.signal)))
             return False
 
     def update_signal(self):
