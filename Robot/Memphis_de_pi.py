@@ -7,7 +7,7 @@ import brickpi3  # import the BrickPi3 drivers
 from Touch_sensor import Touch_sensor_class
 from IR_Sensor import IR_Sensor
 from Engine import Engine
-from math import *
+import math
 
 
 class Memphis_de_pi:
