@@ -41,7 +41,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-
+# Python
+__pycache__/
 
 
 
