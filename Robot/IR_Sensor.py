@@ -1,7 +1,6 @@
 import brickpi3  # import the BrickPi3 drivers
 
 BP = brickpi3.BrickPi3()  # Create an instance of the BrickPi3 class. BP will be the BrickPi3 object.
-
 BP.set_sensor_type(BP.PORT_3, BP.SENSOR_TYPE.EV3_INFRARED_PROXIMITY)
 
 class IR_Sensor:
@@ -11,10 +10,10 @@ class IR_Sensor:
 
     def isTooClose(self):
         self.update_signal()
-        if self.signal < 60:
+        if self.signal < 70:
             print("Infra signal: %s" % (str(self.signal)))
             return True
-        elif self.signal > 59:
+        elif self.signal > 69:
             print("Infra signal: %s" % (str(self.signal)))
             return False
 
