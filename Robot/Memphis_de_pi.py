@@ -20,21 +20,21 @@ class Memphis_de_pi:
 
     def move_forward(self, speed):
     # print("Moving forward function is starting")
-        self.engine_Left.change_speed((21/20)*speed)
-        self.engine_Right.change_speed(speed)
+        self.engine_Left.accelerate((21/20)*speed)
+        self.engine_Right.accelerate(speed)
     # print("Moving forward function is finished")
 
     def move_backward(self, speed):
-        self.engine_Left.change_speed(-speed)
-        self.engine_Right.change_speed(-speed)
+        self.engine_Left.accelerate(-speed)
+        self.engine_Right.accelerate(-speed)
 
     def turn_right(self, speed):
-        self.engine_Left.change_speed(speed)
-        self.engine_Right.change_speed(-speed)
+        self.engine_Left.accelerate(speed)
+        self.engine_Right.accelerate(-speed)
 
     def turn_left(self, speed):
-        self.engine_Left.change_speed(-speed)
-        self.engine_Right.change_speed(speed)
+        self.engine_Left.accelerate(-speed)
+        self.engine_Right.accelerate(speed)
 
     def stop_move(self):
         self.engine_Left.change_speed(0)
