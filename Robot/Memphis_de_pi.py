@@ -106,8 +106,8 @@ class Memphis_de_pi:
 memphis = Memphis_de_pi()
 
 try:
-    # memphis.move_forward(50)
-    memphis.manage_move()
+    memphis.move_forward(50)
+    # memphis.manage_move()
     # memphis.move_forward_test()
 except KeyboardInterrupt:
     memphis.stop_move()
