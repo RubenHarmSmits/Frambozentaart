@@ -4,10 +4,11 @@ from __future__ import division  # ''
 
 import time  # import the time library for the sleep function
 import brickpi3  # import the BrickPi3 drivers
-from Touch_sensor import Touch_sensor_class
-from IR_Sensor import IR_Sensor
+from Touch_Sensor import Touch_sensor_class
+from IR_Sensor import IR_sensor_class
 from Engine import Engine
-import math
+from Color_Sensor import Color_sensor_class 
+
 
 
 class Memphis_de_pi:
@@ -15,7 +16,7 @@ class Memphis_de_pi:
     def __init__(self):
         self.my_Touch_Sensor_Front = Touch_sensor_class(1)
         self.my_Touch_Sensor_Wip = Touch_sensor_class(2)
-        self.my_IR_Sensor = IR_Sensor()
+        self.my_IR_Sensor = IR_sensor_class()
         self.engine_Left = Engine(1)
         self.engine_Right = Engine(2)
         self.my_Color_Sensor = Color_sensor_class()
