@@ -17,15 +17,27 @@ class IR_Sensor:
             print("Infra signal: %s" % (str(self.signal)))
             return False
 
+    # def average_IR_to_far(self):
+    #     sum_distance = 0
+    #     for i in range(5):
+    #         distance = BP.get_sensor(BP.PORT_3)
+    #         sum_distance += distance
+    #     if sum_distance/5>=80:
+    #         return True
+    #     return False
+
     def average_IR_to_far(self):
         sum_distance = 0
-        for i in range(5):
-            distance = BP.get_sensor(BP.PORT_3)
-            sum_distance += distance
-        if sum_distance/5>=80:
-            return True
-        return False
 
+        for i in range(5):
+            self.update_signal()
+            distance = self.signal
+            sum_distance += distance
+
+        if sum_distance / 5 >= 80:
+            return True
+        else:
+            return False
 
 
     def update_signal(self):
