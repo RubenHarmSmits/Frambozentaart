@@ -65,7 +65,9 @@ class Memphis_de_pi:
         elif not self.my_IR_Sensor.isTooClose():
             self.state = "turn right"
             print("Turning right")
-
+        elif self.my_IR_Sensor.average_IR_to_far():
+            self.state = "special_right"
+            print("Special Right")
         elif not self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
             self.state = "forward"
             print("Moving forward")
