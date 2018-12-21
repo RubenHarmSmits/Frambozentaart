@@ -13,10 +13,12 @@ import math
 class Memphis_de_pi:
 
     def __init__(self):
-        self.my_Touch_Sensor = Touch_sensor_class()
+        self.my_Touch_Sensor_Front = Touch_sensor_class(1)
+        self.my_Touch_Sensor_Wip = Touch_sensor_class(2)
         self.my_IR_Sensor = IR_Sensor()
         self.engine_Left = Engine(1)
         self.engine_Right = Engine(2)
+        self.my_Color_Sensor = Color_sensor_class()
 
     def move_forward(self, speed):
     # print("Moving forward function is starting")
@@ -32,22 +34,55 @@ class Memphis_de_pi:
         self.engine_Left.change_speed(speed)
         self.engine_Right.change_speed(-speed)
 
+    # def turn_diagonal_right(self,speed):
+    #     self.engine_Left.change_speed(1.2* speed)
+    #     self.engine_Right.change_speed(speed)
+
     def turn_left(self, speed):
         self.engine_Left.change_speed(-speed)
         self.engine_Right.change_speed(speed)
+
+    # def turn_diagonal_left(self,speed):
+    #     self.engine_Left.change_speed(speed)
+    #     self.engine_Right.change_speed(1.2 *speed)
 
     def stop_move(self):
         self.engine_Left.change_speed(0)
         self.engine_Right.change_speed(0)
 
-    # def special_right(self):
-    #     self.set_duration(2, self.turn_right())
-    #     self.set_duration(2, self.move_forward())
+    # def wip_program_prepare(self):
+    #     time.sleep(1.5)
+    #     self.adjust_right()
+    #     time.sleep(1.5)
+    #     self.set_duration(3,self.move_backward(30))
+    #     time.sleep(1.5)
+    #     self.adjust_left()
+    #     time.sleep(1.5)
+    #     while not self.my_Touch_Sensor_Wip.get_signal():
+    #         self.move_forward(50)
+    #     self.wip_program_execute()
     #
-    # def set_duration(self, duration, function):
-    #     t_end = time.time() + duration
-    #     while time.time() < t_end:
-    #         function
+    # def wip_program_execute(self):
+    #     while not self.my_Touch_Sensor_Wip.get_signal():
+    #         if self.my_Color_Sensor.get_color() == "Red":
+    #             self.set_duration(1,self.turn_diagonal_left(20))
+    #         else:
+    #             self.set_duration(1, self.turn_diagonal_right(20))
+    #
+    # def adjust_right(self):
+    #     self.set_duration(0.5, self.turn_right(30))
+    #
+    # def adjust_left(self):
+    #     self.set_duration(0.5, self.turn_left(30))
+
+    def special_right(self):
+        self.set_duration(2, self.turn_right(30))
+        self.set_duration(2, self.move_forward(30))
+
+    def set_duration(self, duration, function):
+        t_end = time.time() + duration
+        while time.time() < t_end:
+            function
 
 
     def manage_move(self):
@@ -59,7 +94,10 @@ class Memphis_de_pi:
 
 
     def check_state(self):
-        if self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
+
+        # if self.my_Touch_Sensor_Wip.get_signal():
+        #     self.state = "Wip program"
+        if self.my_Touch_Sensor_Front.get_signal() and self.my_IR_Sensor.isTooClose():
             self.state = "turn left"
             print("Turning left")
         elif not self.my_IR_Sensor.isTooClose():
@@ -68,7 +106,7 @@ class Memphis_de_pi:
         elif self.my_IR_Sensor.average_IR_to_far():
             self.state = "special_right"
             print("Special Right")
-        elif not self.my_Touch_Sensor.get_signal() and self.my_IR_Sensor.isTooClose():
+        elif not self.my_Touch_Sensor_Front.get_signal() and self.my_IR_Sensor.isTooClose():
             self.state = "forward"
             print("Moving forward")
 
@@ -79,6 +117,8 @@ class Memphis_de_pi:
             self.turn_right(20)
         elif self.state == "forward":
             self.move_forward(40)
+        # elif self.state == "Wip program":
+        #     self.wip_program_prepare()
         # elif self.state == "special_right":
         #     self.special_right()
 
