@@ -17,24 +17,29 @@ class Color_sensor_class:
         self.color = ["none", "Black", "Blue", "Green", "Yellow", "Red", "White", "Brown"]
         self.value = BP.get_sensor(BP.PORT_4)
         print(self.color[self.value])
+        return self.color[self.value]
 
-    def get_color_pattern(self):
+    def set_color_state(self):
         print("Inside get color pattern")
         self.get_color()
-        if not self.save_index:
-            self.save_index = 0
-        self.color_list[self.save_index] = self.color[self.value]
-        print(self.color_list)
-        self.save_index = self.save_index + 1
-        if self.save_index == 4:
-            self.save_index = 0
-        self.set_color_pattern_state()
-
-    def set_color_pattern_state(self):
-        # print("Inside set color pattern state")
-        if self.color_list == ["Blue", "Black", "Red"]:
+        if self.color[self.value] == "Brown":
             print("end of wip")
             self.color_state = "end of wip"
         else:
             self.color_state = "normal"
+        # if not self.save_index:
+        #     self.save_index = 0
+        # self.color_list[self.save_index] = self.color[self.value]
+        # self.save_index = self.save_index + 1
+        # if self.save_index == 4:
+        #     self.save_index = 0
+        # self.set_color_pattern_state()
+
+    # def set_color_pattern_state(self):
+    #     # print("Inside set color pattern state")
+    #     if self.color_list == ["Blue", "Black", "Red"]:
+    #         print("end of wip")
+    #         self.color_state = "end of wip"
+    #     else:
+    #         self.color_state = "normal"
 

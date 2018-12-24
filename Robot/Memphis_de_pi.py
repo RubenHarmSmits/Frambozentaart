@@ -56,20 +56,28 @@ class Memphis_de_pi:
         self.engine_Left.change_speed(0)
         self.engine_Right.change_speed(0)
 
-    # def wip_program_prepare(self):
-    #     print("inside wip program")
-    #     self.my_Color_Sensor.get_color_pattern()
-    #     print(self.my_Color_Sensor.color_state)
-    #
-    #     while self.my_Color_Sensor.color_state == "normal":
-    #         self.my_IR_Sensor.signal == 0
-    #         self.move_forward(20)
-    #         if self.my_Color_Sensor.get_color() == "Red":
-    #             self.set_duration(1,self.turn_diagonal_left(20))
-    #         else:
-    #             self.set_duration(1, self.turn_diagonal_right(20))
-    #         self.my_Color_Sensor.get_color_pattern()
-    #         print("end of wip loop")
+    def wip_program_prepare(self):
+        print("inside wip program")
+        self.set_duration(0.4, self.move_forward(20))
+        # self.my_Color_Sensor.set_color_state()
+        # print(self.my_Color_Sensor.color_state)
+
+        while self.my_Color_Sensor.get_color() != "Black":
+            self.my_IR_Sensor.signal == 0
+            self.move_forward(20)
+            if self.my_Color_Sensor.get_color() == "Red":
+                # self.set_duration(1, self.turn_diagonal_left(20))
+                self.turn_diagonal_left(20)
+                print("Turning diagonal left")
+            else:
+                # self.set_duration(1, self.turn_diagonal_right(20))
+                self.turn_diagonal_right(20)
+                print("Turning diagonal right")
+            # self.my_Color_Sensor.get_color_pattern()
+            # print(self.my_Color_Sensor.color_state)
+            # print("end of wip loop")
+        print("outside of wip loop")
+        self.set_duration(4, self.move_forward(20))
 
     #     time.sleep(1.5)
     #     self.adjust_right()
