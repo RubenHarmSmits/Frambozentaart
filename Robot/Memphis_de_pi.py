@@ -21,53 +21,53 @@ class Memphis_de_pi:
         self.my_Color_Sensor = Color_sensor_class()
 
     def move_forward(self, speed):
-    # print("Moving forward function is starting")
         self.engine_Left.change_speed(21 / 20 * speed)
         self.engine_Right.change_speed(speed)
-    #
-    #     self.engine_Left.accelerate((21 / 20) * speed)
-    #     self.engine_Right.accelerate(speed)
-    # print("Moving forward function is finished")
 
     def move_backward(self, speed):
         self.engine_Left.change_speed(21 / 20 * -speed)
         self.engine_Right.change_speed(-speed)
 
-        # self.engine_Left.accelerate(-speed)
-        # self.engine_Right.accelerate(-speed)
-
     def turn_right(self, speed):
         self.engine_Left.change_speed(speed)
         self.engine_Right.change_speed(-speed)
 
-        # self.engine_Left.accelerate(speed)
-        # self.engine_Right.accelerate(-speed)
-
-    # def turn_diagonal_right(self,speed):
-    #     self.engine_Left.change_speed(1.2* speed)
-    #     self.engine_Right.change_speed(speed)
+    def turn_diagonal_right(self,speed):
+        self.engine_Left.change_speed(1.2* speed)
+        self.engine_Right.change_speed(speed)
 
     def turn_left(self, speed):
         self.engine_Left.change_speed(-speed)
         self.engine_Right.change_speed(speed)
 
-        # self.engine_Left.accelerate(-speed)
-        # self.engine_Right.accelerate(speed)
-
     def special_right(self):
-        print("Special Right, 4 seconds start")
+        self.set_duration(0.5, self.move_backward(10))
         self.set_duration(1, self.turn_right(20))
         self.set_duration(2, self.move_forward(30))
 
-    # def turn_diagonal_left(self,speed):
-    #     self.engine_Left.change_speed(speed)
-    #     self.engine_Right.change_speed(1.2 *speed)
+    def turn_diagonal_left(self,speed):
+        self.engine_Left.change_speed(speed)
+        self.engine_Right.change_speed(1.2 *speed)
 
     def stop_move(self):
         self.engine_Left.change_speed(0)
         self.engine_Right.change_speed(0)
 
-    # def wip_program_prepare(self):
+    def wip_program_prepare(self):
+        print("inside wip program")
+        self.my_Color_Sensor.get_color_pattern()
+        print(self.my_Color_Sensor.color_state)
+
+        while self.my_Color_Sensor.color_state == "normal":
+            self.my_IR_Sensor.signal == 0
+            self.move_forward(20)
+            if self.my_Color_Sensor.get_color() == "Red":
+                self.set_duration(1,self.turn_diagonal_left(20))
+            else:
+                self.set_duration(1, self.turn_diagonal_right(20))
+            self.my_Color_Sensor.get_color_pattern()
+            print("end of wip loop")
+
     #     time.sleep(1.5)
     #     self.adjust_right()
     #     time.sleep(1.5)
@@ -93,48 +93,36 @@ class Memphis_de_pi:
     #     self.set_duration(0.5, self.turn_left(30))
     #
 
-
     def set_duration(self, duration, function):
         t_end = time.time() + duration
         while time.time() < t_end:
             function
 
-
     def manage_move(self):
         while True:
+            self.my_IR_Sensor.save_signal()
+            print("IR value saved %s" % (str(self.my_IR_Sensor.signal_list[self.my_IR_Sensor.save_index - 1])))
+            self.my_IR_Sensor.average_signal()
             self.check_state()
+
+
             self.move()
 
             time.sleep(0.02)
 
-    # def check_state(self):
-    #     if self.my_IR_Sensor.average_IR_to_far():
-    #         self.state = "forward"
-    #         print("Moving forward")
-    #
-    #         if self.my_Touch_Sensor_Front.get_signal() and self.my_IR_Sensor.average_IR_to_far():
-    #             self.state = "special right"
-    #             print("Special Right")
-    #
-    #         elif self.my_Touch_Sensor_Front.get_signal() and not self.my_IR_Sensor.average_IR_to_far():
-    #             self.state = "turn left"
-    #             print("Turning left")
-    #
-    #         else:
-    #             self.state = "forward"
-    #             print("Moving forward")
-    #     else:
-    #         pass
-
     def check_state(self):
 
-        if self.my_IR_Sensor.average_IR_to_far():
+        if self.my_IR_Sensor.current_average > 40:
             self.state = "special right"
             print("Special Right")
 
         elif self.my_Touch_Sensor_Front.get_signal():
             self.state = "turn left"
             print("Turning left")
+
+        elif self.my_Touch_Sensor_Wip.get_signal():
+            self.state = "Wip program"
+            print("Wip Sensor is on")
 
         else:
             self.state = "forward"
@@ -161,16 +149,31 @@ class Memphis_de_pi:
     def move(self):
         if self.state == "turn left":
             self.set_duration(0.5, self.move_backward(20))
-            self.set_duration(1, self.turn_left(20))
+            self.set_duration(1, self.turn_left(17))
         elif self.state == "special right":
-        # elif self.state == "turn right":
             self.special_right()
         elif self.state == "forward":
             self.move_forward(40)
-        # elif self.state == "Wip program":
-        #     self.wip_program_prepare()
-        # elif self.state == "special_right":
-        #     self.special_right()
+        elif self.state == "Wip program":
+            print("IT WORKS")
+            self.wip_program_prepare()
+
+
+memphis = Memphis_de_pi()
+
+try:
+    # memphis.move_forward(0)
+    memphis.manage_move()
+    # memphis.my_Color_Sensor.get_color()
+except KeyboardInterrupt:
+    memphis.stop_move()
+
+
+
+
+
+
+
 
 
     # def drive_straight(self):
@@ -191,17 +194,3 @@ class Memphis_de_pi:
     #
     #     correct_distance = 50  # mm
     #     correct_slanted_distance = (correct_distance / math.degrees(math.cos(correction_angle)))
-
-
-memphis = Memphis_de_pi()
-
-try:
-    # memphis.set_duration(2, memphis.move_forward(20))
-    # memphis.special_right()
-    # memphis.set_duration(1, memphis.turn_left(20))
-    # memphis.move_forward(0)
-    memphis.manage_move()
-    # memphis.move_forward_test()
-except KeyboardInterrupt:
-    memphis.stop_move()
-

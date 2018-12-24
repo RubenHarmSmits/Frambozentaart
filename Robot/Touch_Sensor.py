@@ -2,6 +2,7 @@ import brickpi3  # import the BrickPi3 drivers
 
 BP = brickpi3.BrickPi3()  # Create an instance of the BrickPi3 class. BP will be the BrickPi3 object.
 BP.set_sensor_type(BP.PORT_1,BP.SENSOR_TYPE.TOUCH)
+BP.set_sensor_type(BP.PORT_2,BP.SENSOR_TYPE.TOUCH)
 
 
 class Touch_sensor_class:
