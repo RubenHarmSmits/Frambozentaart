@@ -27,15 +27,19 @@ class Color_sensor_class:
             self.color_state = "normal"
 
     def end_quadrant_check(self):
+        self.color = ["none", "Black", "Blue", "Green", "Yellow", "Red", "White", "Brown"]
         self.value = BP.get_sensor(BP.PORT_4)
         if self.color[self.value] == "Black":
             self.color_list[0] = self.color[self.value]
+            print("End Quadrant: Black")
             return False
         elif self.color_list[0] == "Black" and self.color[self.value] == "Red":
             self.color_list[1] = self.color[self.value]
+            print("End Quadrant: Black and Red")
             return True
         else:
             self.color_list[0] = 0
             self.color_list[1] = 0
+            print("End Quadrant: Other")
         return False
 

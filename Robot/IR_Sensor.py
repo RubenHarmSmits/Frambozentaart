@@ -8,7 +8,7 @@ class IR_sensor_class:
 
     def __init__(self):
         self.signal = 0
-        self.signal_list = [0, 0, 0, 0, 0]
+        self.signal_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.save_index = 0
         self.current_average = 10
 
@@ -25,13 +25,20 @@ class IR_sensor_class:
         self.update_signal()
         self.signal_list[self.save_index] = self.signal
         self.save_index = self.save_index + 1
-        if self.save_index == 5:
+        if self.save_index == 10:
             self.save_index = 0
+        print("Signal list: %s" % self.signal_list)
 
     def average_signal(self):
         self.save_signal()
         self.current_average = sum(self.signal_list)/len(self.signal_list)
         print("Average IR values: %s" % (str(self.current_average)))
+
+    def new_average(self):
+        i = 0
+        while i < len(self.signal_list):
+            self.save_signal()
+            i = i+1
 
     def update_signal(self):
         if BP.get_sensor(BP.PORT_3) < 100:
