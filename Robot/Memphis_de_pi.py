@@ -54,7 +54,7 @@ class Memphis_de_pi:
         self.engine_Right.change_speed(speed2)
 
     def special_right(self):
-        # self.set_duration(0.5, self.move_backward(10))
+        self.set_duration(1, self.move_backwards_dps(60))
         self.set_duration(1, self.turn_right(20))
         self.set_duration(2, self.move_forward_dps(135))
         # even stilzetten om alles goed te kunnen observeren
