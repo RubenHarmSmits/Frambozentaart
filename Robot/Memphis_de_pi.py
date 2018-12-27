@@ -25,6 +25,10 @@ class Memphis_de_pi:
         self.engine_Left.change_speed(self.wheel_bias * speed)
         self.engine_Right.change_speed(1/self.wheel_bias * speed)
 
+    def move_forward_dps(self, speed):
+        self.engine_Left.change_speed_dps(self.wheel_bias * speed)
+        self.engine_Right.change_speed_dps(1/self.wheel_bias * speed)
+
     # def move_forward(self, speed):
     #     self.engine_Left.change_speed(21 / 20 * speed)
     #     self.engine_Right.change_speed(speed)
@@ -50,9 +54,11 @@ class Memphis_de_pi:
         self.engine_Right.change_speed(speed2)
 
     def special_right(self):
-        self.set_duration(0.5, self.move_backward(10))
+        # self.set_duration(0.5, self.move_backward(10))
         self.set_duration(1, self.turn_right(20))
-        self.set_duration(2, self.move_forward(30))
+        self.set_duration(2, self.move_forward_dps(135))
+        # even stilzetten om alles goed te kunnen observeren
+        self.set_duration(3, self.stop_move())
         self.my_IR_Sensor.save_signal()
         self.my_IR_Sensor.save_signal()
         self.my_IR_Sensor.save_signal()
@@ -65,14 +71,16 @@ class Memphis_de_pi:
     def execute_smooth_turn(self, directionLeft):
         self.set_duration(2, self.move_backwards_dps(111))
         self.set_duration(4, self.smooth_turn_right(174, directionLeft))
+        # even stilzetten om alles goed te kunnen observeren
+        self.set_duration(3, self.stop_move())
         
     def smooth_turn(self, speed, directionLeft):
         if directionLeft:
-            self.engine_Left.change_speed_dps(speed)
-            self.engine_Right.change_speed_dps(0.5 * speed)
-        elif not directionLeft:
             self.engine_Left.change_speed_dps(0.5 * speed)
             self.engine_Right.change_speed_dps(speed)
+        elif not directionLeft:
+            self.engine_Left.change_speed_dps(speed)
+            self.engine_Right.change_speed_dps(0.5 * speed)
             
     def move_backwards_dps(self, speed):
         self.engine_Left.change_speed_dps(-speed)
@@ -134,6 +142,7 @@ class Memphis_de_pi:
             print("Special Right")
 
         elif self.my_Touch_Sensor_Front.get_signal():
+            self.set_duration(1,self.move_forward(20))
             self.state = "turn left"
             print("Turning left")
 
