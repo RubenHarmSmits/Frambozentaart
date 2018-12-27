@@ -62,12 +62,32 @@ class Memphis_de_pi:
         self.engine_Left.change_speed(speed)
         self.engine_Right.change_speed(1.2 * speed)
 
+    def execute_smooth_turn(self, directionLeft):
+        self.set_duration(2, self.move_backwards_dps(111))
+        self.set_duration(4, self.smooth_turn_right(174, directionLeft))
+        
+    def smooth_turn(self, speed, directionLeft):
+        if directionLeft:
+            self.engine_Left.change_speed_dps(speed)
+            self.engine_Right.change_speed_dps(0.5 * speed)
+        elif not directionLeft:
+            self.engine_Left.change_speed_dps(0.5 * speed)
+            self.engine_Right.change_speed_dps(speed)
+            
+    def move_backwards_dps(self, speed):
+        self.engine_Left.change_speed_dps(-speed)
+        self.engine_Right.change_speed_dps(-speed)
+    
     def stop_move(self):
         self.engine_Left.change_speed(0)
         self.engine_Right.change_speed(0)
 
     def wip_program_execute(self):
         print("inside wip program")
+        self.set_duration(3, self.move_backward(20))
+        self.move_forward(20)
+        while not self.my_Touch_Sensor_Wip.get_signal():
+            self.keep_IR_distance(50)
         self.set_duration(0.4, self.move_forward(20))
 
         while not self.my_Color_Sensor.end_quadrant_check():
@@ -104,6 +124,8 @@ class Memphis_de_pi:
             self.move()
 
             time.sleep(0.02)
+            if self.my_Color_Sensor.end_quadrant_check() and self.my_Color_Sensor.get_color() == "Black":
+                self.stop_move()
 
     def check_state(self):
 
@@ -147,8 +169,7 @@ class Memphis_de_pi:
                 self.set_duration(0.5, self.move_backward(20))
                 self.set_duration(1, self.turn_left(17))
             elif self.my_IR_Sensor.current_average <= 20:
-                self.set_duration(2, self.move_backward(20))
-                self.set_duration(2, self.turn_left_wide(5, 20))
+                self.execute_smooth_turn(True)
             self.my_IR_Sensor.save_signal()
             self.my_IR_Sensor.save_signal()
             self.my_IR_Sensor.save_signal()

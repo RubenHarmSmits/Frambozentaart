@@ -20,6 +20,8 @@ class Engine:
         self.speed = target_speed
         BP.set_motor_power(self.portcode, self.speed)
 
-
+    def change_speed_dps(self, target_speed_dps):
+        self.speed = target_speed_dps
+        BP.set_motor_dps(self.portcode, self.speed)
 
 
