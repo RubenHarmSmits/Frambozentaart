@@ -45,6 +45,7 @@ class IR_sensor_class:
             self.save_index = 0
 
     def average_signal(self):
+        self.save_signal()
         self.current_average = sum(self.signal_list)/len(self.signal_list)
         print("Average IR values: %s" % (str(self.current_average)))
 

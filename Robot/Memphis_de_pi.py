@@ -19,9 +19,6 @@ class Memphis_de_pi:
         self.engine_Left = Engine(1)
         self.engine_Right = Engine(2)
         self.my_Color_Sensor = Color_sensor_class()
-        self.stage = 0
-        self.stage_time = 0
-        self.state = "forward"
 
     def move_forward(self, speed):
         self.engine_Left.change_speed(21 / 20 * speed)
@@ -43,10 +40,18 @@ class Memphis_de_pi:
         self.engine_Left.change_speed(-speed)
         self.engine_Right.change_speed(speed)
 
-    # def special_right(self):
-    #     self.set_duration(0.5, self.move_backward(10))
-    #     self.set_duration(1, self.turn_right(20))
-    #     self.set_duration(2, self.move_forward(30))
+    def turn_left_wide(self, speed1, speed2):
+        self.engine_Left.change_speed(speed1)
+        self.engine_Right.change_speed(speed2)
+
+    def special_right(self):
+        self.set_duration(0.5, self.move_backward(10))
+        self.set_duration(1, self.turn_right(20))
+        self.set_duration(2, self.move_forward(30))
+        self.my_IR_Sensor.save_signal()
+        self.my_IR_Sensor.save_signal()
+        self.my_IR_Sensor.save_signal()
+        self.my_IR_Sensor.save_signal()
 
     def turn_diagonal_left(self,speed):
         self.engine_Left.change_speed(speed)
@@ -104,15 +109,13 @@ class Memphis_de_pi:
     #     self.set_duration(0.5, self.turn_left(30))
     #
 
-    # def set_duration(self, duration, function):
-    #     t_end = time.time() + duration
-    #     while time.time() < t_end:
-    #         function
+    def set_duration(self, duration, function):
+        t_end = time.time() + duration
+        while time.time() < t_end:
+            function
 
     def manage_move(self):
         while True:
-            self.my_IR_Sensor.save_signal()
-            print("IR value saved %s" % (str(self.my_IR_Sensor.signal_list[self.my_IR_Sensor.save_index - 1])))
             self.my_IR_Sensor.average_signal()
             self.check_state()
 
@@ -120,37 +123,24 @@ class Memphis_de_pi:
             self.move()
 
             time.sleep(0.02)
-            self.stage_time = self.stage_time + 0.02
 
     def check_state(self):
-        if self.state == "forward":
-            if self.my_IR_Sensor.current_average > 40:
-                self.state = "special right"
-                print("Special Right")
 
-            elif self.my_Touch_Sensor_Front.get_signal():
-                self.state = "turn left"
-                print("Turning left")
+        if self.my_IR_Sensor.current_average > 40:
+            self.state = "special right"
+            print("Special Right")
 
-            elif self.my_Touch_Sensor_Wip.get_signal():
-                self.state = "Wip program"
-                print("Wip Sensor is on")
+        elif self.my_Touch_Sensor_Front.get_signal():
+            self.state = "turn left"
+            print("Turning left")
 
-            else:
-                print("Moving forward")
+        elif self.my_Touch_Sensor_Wip.get_signal():
+            self.state = "Wip program"
+            print("Wip Sensor is on")
 
-        elif self.state == "turn left" and self.stage == 2:
+        else:
             self.state = "forward"
-            self.stage = 0
-            self.stage_time = 0
-            print("Ended turn left state")
-
-        elif self.state == "special right" and self.stage == 2:
-            if self.my_Touch_Sensor_Front.get_signal():
-                self.stage = 0
-                self.stage_time = 0
-                self.state = "forward"
-                print("Ended special right state")
+            print("Moving forward")
 
 
     # def check_state(self):
@@ -172,52 +162,24 @@ class Memphis_de_pi:
 
     def move(self):
         if self.state == "turn left":
-            if self.stage == 0:
-                self.move_backward_with_time(0.5)
-
-            elif self.stage == 1:
-                if self.stage_time < 1:
-                    self.turn_left(17)
-                elif self.stage_time >= 1:
-                    self.stage = 2
-
+            if self.my_IR_Sensor.current_average > 20:
+                self.set_duration(0.5, self.move_backward(20))
+                self.set_duration(1, self.turn_left(17))
+            elif self.my_IR_Sensor.current_average <= 20:
+                self.set_duration(2, self.move_backward(20))
+                self.set_duration(2, self.turn_left_wide(5, 20))
+                self.my_IR_Sensor.save_signal()
+                self.my_IR_Sensor.save_signal()
+                self.my_IR_Sensor.save_signal()
+                self.my_IR_Sensor.save_signal()
         elif self.state == "special right":
-            if self.stage == 0:
-                self.move_backward_with_time(0.5)
-
-            elif self.stage == 1:
-                if self.stage_time < 1:
-                    self.turn_right(20)
-                elif self.stage_time >= 1:
-                    self.stage = 2
-                    self.move_forward(20)
-
+            self.special_right()
         elif self.state == "forward":
-            if self.stage == 0:
-                if self.stage_time < 0.1:
-                    self.move_forward(30)
-                elif self.stage_time >= 0.1:
-                    self.stage = 1
-            elif self.stage == 1:
-                self.adjust_trajectory()
-                self.stage = 0
-                self.stage_time = 0
+            self.move_forward(40)
         elif self.state == "Wip program":
             print("IT WORKS")
             self.wip_program_prepare()
 
-    def move_backward_with_time(self, duration):
-        if self.stage_time < duration:
-            self.move_backward(10)
-        elif self.stage_time >= duration:
-            self.stage = self.stage + 1
-            self.stage_time = 0
-
-    def adjust_trajectory(self):
-        if self.my_IR_Sensor.signal > self.my_IR_Sensor.current_average:
-            self.engine_Right.change_speed(self.engine_Right.speed - 1)
-        elif self.my_IR_Sensor.signal < self.my_IR_Sensor.current_average:
-            self.engine_Left.change_speed(self.engine_Left.speed - 1)
 
 memphis = Memphis_de_pi()
 
