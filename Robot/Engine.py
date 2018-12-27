@@ -4,7 +4,7 @@ import time
 BP = brickpi3.BrickPi3()  # Create an instance of the BrickPi3 class. BP will be the BrickPi3 object.
 
 
-class Engine():
+class Engine:
 
     def __init__(self, port):
         self.speed = 0
@@ -20,15 +20,6 @@ class Engine():
         self.speed = target_speed
         BP.set_motor_power(self.portcode, self.speed)
 
-    # def accelerate(self, target_speed):
-    #     if self.speed < target_speed:
-    #         self.speed = self.speed + 1
-    #         BP.set_motor_power(self.portcode, self.speed)
-    #     elif self.speed > target_speed:
-    #         self.speed = self.speed - 1
-    #         BP.set_motor_power(self.portcode, self.speed)
-    #     else:
-    #         pass
 
 
 

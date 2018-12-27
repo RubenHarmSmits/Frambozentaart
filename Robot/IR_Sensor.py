@@ -21,22 +21,6 @@ class IR_sensor_class:
             print("Infra signal: %s" % (str(self.signal)))
             return False
 
-    # def average_IR_to_far(self):
-    #     sum_distance = 0
-    #
-    #     for i in range(5):
-    #         self.update_signal()
-    #         time.sleep(0.02)
-    #         print("Infra signal: %s" % (str(self.signal)))
-    #         distance = self.signal
-    #         sum_distance = distance + sum_distance
-    #         print("Sum_distance: %s" % (str(sum_distance)))
-    #
-    #     if sum_distance / 5 >= 40:
-    #         return True
-    #     else:
-    #         return False
-
     def save_signal(self):
         self.update_signal()
         self.signal_list[self.save_index] = self.signal
@@ -53,3 +37,18 @@ class IR_sensor_class:
         if BP.get_sensor(BP.PORT_3) < 100:
             self.signal = BP.get_sensor(BP.PORT_3)
 
+    # def average_IR_to_far(self):
+    #     sum_distance = 0
+    #
+    #     for i in range(5):
+    #         self.update_signal()
+    #         time.sleep(0.02)
+    #         print("Infra signal: %s" % (str(self.signal)))
+    #         distance = self.signal
+    #         sum_distance = distance + sum_distance
+    #         print("Sum_distance: %s" % (str(sum_distance)))
+    #
+    #     if sum_distance / 5 >= 40:
+    #         return True
+    #     else:
+    #         return False

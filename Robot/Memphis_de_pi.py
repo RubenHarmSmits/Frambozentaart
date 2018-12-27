@@ -19,10 +19,15 @@ class Memphis_de_pi:
         self.engine_Left = Engine(1)
         self.engine_Right = Engine(2)
         self.my_Color_Sensor = Color_sensor_class()
+        self.wheel_bias = 41/40
 
     def move_forward(self, speed):
-        self.engine_Left.change_speed(21 / 20 * speed)
-        self.engine_Right.change_speed(speed)
+        self.engine_Left.change_speed(self.wheel_bias * speed)
+        self.engine_Right.change_speed(1/self.wheel_bias * speed)
+
+    # def move_forward(self, speed):
+    #     self.engine_Left.change_speed(21 / 20 * speed)
+    #     self.engine_Right.change_speed(speed)
 
     def move_backward(self, speed):
         self.engine_Left.change_speed(21 / 20 * -speed)
@@ -33,7 +38,7 @@ class Memphis_de_pi:
         self.engine_Right.change_speed(-speed)
 
     def turn_diagonal_right(self,speed):
-        self.engine_Left.change_speed(1.2* speed)
+        self.engine_Left.change_speed(1.2 * speed)
         self.engine_Right.change_speed(speed)
 
     def turn_left(self, speed):
@@ -55,20 +60,17 @@ class Memphis_de_pi:
 
     def turn_diagonal_left(self,speed):
         self.engine_Left.change_speed(speed)
-        self.engine_Right.change_speed(1.2 *speed)
+        self.engine_Right.change_speed(1.2 * speed)
 
     def stop_move(self):
         self.engine_Left.change_speed(0)
         self.engine_Right.change_speed(0)
 
-    def wip_program_prepare(self):
+    def wip_program_execute(self):
         print("inside wip program")
         self.set_duration(0.4, self.move_forward(20))
-        # self.my_Color_Sensor.set_color_state()
-        # print(self.my_Color_Sensor.color_state)
 
-        while self.my_Color_Sensor.get_color() != "Black":
-            self.my_IR_Sensor.signal == 0
+        while not self.my_Color_Sensor.end_quadrant_check():
             self.move_forward(20)
             if self.my_Color_Sensor.get_color() == "Red":
                 # self.set_duration(1, self.turn_diagonal_left(20))
@@ -78,36 +80,15 @@ class Memphis_de_pi:
                 # self.set_duration(1, self.turn_diagonal_right(20))
                 self.turn_diagonal_right(20)
                 print("Turning diagonal right")
-            # self.my_Color_Sensor.get_color_pattern()
-            # print(self.my_Color_Sensor.color_state)
-            # print("end of wip loop")
+
         print("outside of wip loop")
         self.set_duration(4, self.move_forward(20))
 
-    #     time.sleep(1.5)
-    #     self.adjust_right()
-    #     time.sleep(1.5)
-    #     self.set_duration(3,self.move_backward(30))
-    #     time.sleep(1.5)
-    #     self.adjust_left()
-    #     time.sleep(1.5)
-    #     while not self.my_Touch_Sensor_Wip.get_signal():
-    #         self.move_forward(50)
-    #     self.wip_program_execute()
-    #
-    # def wip_program_execute(self):
-    #     while not self.my_Touch_Sensor_Wip.get_signal():
-    #         if self.my_Color_Sensor.get_color() == "Red":
-    #             self.set_duration(1,self.turn_diagonal_left(20))
-    #         else:
-    #             self.set_duration(1, self.turn_diagonal_right(20))
-    #
-    # def adjust_right(self):
-    #     self.set_duration(0.5, self.turn_right(30))
-    #
-    # def adjust_left(self):
-    #     self.set_duration(0.5, self.turn_left(30))
-    #
+    def keep_IR_distance(self, target_distance):
+        if self.my_IR_Sensor.signal > self.my_IR_Sensor.current_average and self.my_IR_Sensor.signal > (target_distance + 5):
+            self.wheel_bias = self.wheel_bias + 0.01
+        elif self.my_IR_Sensor.signal < self.my_IR_Sensor.current_average and self.my_IR_Sensor.signal < (target_distance - 5):
+            self.wheel_bias = self.wheel_bias - 0.01
 
     def set_duration(self, duration, function):
         t_end = time.time() + duration
@@ -119,7 +100,7 @@ class Memphis_de_pi:
             self.my_IR_Sensor.average_signal()
             self.check_state()
 
-
+            self.keep_IR_distance(20)
             self.move()
 
             time.sleep(0.02)
@@ -168,17 +149,17 @@ class Memphis_de_pi:
             elif self.my_IR_Sensor.current_average <= 20:
                 self.set_duration(2, self.move_backward(20))
                 self.set_duration(2, self.turn_left_wide(5, 20))
-                self.my_IR_Sensor.save_signal()
-                self.my_IR_Sensor.save_signal()
-                self.my_IR_Sensor.save_signal()
-                self.my_IR_Sensor.save_signal()
+            self.my_IR_Sensor.save_signal()
+            self.my_IR_Sensor.save_signal()
+            self.my_IR_Sensor.save_signal()
+            self.my_IR_Sensor.save_signal()
         elif self.state == "special right":
             self.special_right()
         elif self.state == "forward":
             self.move_forward(40)
         elif self.state == "Wip program":
-            print("IT WORKS")
-            self.wip_program_prepare()
+            print("Wip! ")
+            self.wip_program_execute()
 
 
 memphis = Memphis_de_pi()
@@ -191,28 +172,3 @@ except KeyboardInterrupt:
     memphis.stop_move()
 
 
-
-
-
-
-
-
-
-    # def drive_straight(self):
-    #
-    #     r_wheel = 31  # mm
-    #     revolutions = get_motor_encoder/ 360   # output motor
-    #     dist_travelled = revolutions*2*math.pi()*r_wheel
-    #
-    #     # misschien het dist_diff pas bij >20mm laten triggeren, anders blijft ie corrigeren
-    #
-    #     dist1 = 15  # arbitrary value
-    #     dist2 = 5  # arbitrary value
-    #     dist_diff = dist1 - dist2
-    #
-    #     alpha = math.degrees(math.atan(dist_diff/dist_travelled))
-    #     correction_angle = 15  # degrees
-    #     gamma = alpha + correction_angle
-    #
-    #     correct_distance = 50  # mm
-    #     correct_slanted_distance = (correct_distance / math.degrees(math.cos(correction_angle)))
