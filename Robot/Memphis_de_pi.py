@@ -19,10 +19,13 @@ class Memphis_de_pi:
         self.engine_Left = Engine(1)
         self.engine_Right = Engine(2)
         self.my_Color_Sensor = Color_sensor_class()
-        self.wheel_bias = 40/40
+        self.wheel_bias = 1.05
+        self.disable_wip = False
+        self.standard_speed = 20
+        self.isInSecondQuadrant = False
 
     def move_forward(self, speed):
-        print("Wheel bias %s" % self.wheel_bias)
+        # print("Wheel bias %s" % self.wheel_bias)
         self.engine_Left.change_speed(self.wheel_bias * speed)
         self.engine_Right.change_speed(1/self.wheel_bias * speed)
 
@@ -30,59 +33,72 @@ class Memphis_de_pi:
         self.wheel_bias = bias
         self.engine_Left.change_speed_dps(self.wheel_bias * speed)
         self.engine_Right.change_speed_dps(1/self.wheel_bias * speed)
-        self.wheel_bias = 40/40
+        self.wheel_bias = 1.05
 
     # def move_forward(self, speed):
     #     self.engine_Left.change_speed(21 / 20 * speed)
     #     self.engine_Right.change_speed(speed)
 
     def move_backward(self, speed):
-        self.engine_Left.change_speed(21 / 20 * -speed)
+        self.engine_Left.change_speed(1.05 * -speed)
         self.engine_Right.change_speed(-speed)
 
-    def turn_right1(self, speed):
-        self.engine_Left.change_speed_dps(0)
+    def move_backwards_dps(self, speed):
+        self.engine_Left.change_speed_dps(1.05 * -speed)
         self.engine_Right.change_speed_dps(-speed)
+
+    # def turn_right1(self, speed):
+    #     self.engine_Left.change_speed_dps(0)
+    #     self.engine_Right.change_speed_dps(-speed)
 
     def turn_right2(self, speed):
         self.engine_Left.change_speed_dps(speed)
         self.engine_Right.change_speed_dps(0)
 
-    def turn_diagonal_right(self,speed):
-        self.engine_Left.change_speed(1.2 * speed)
+    def turn_diagonal_right(self, speed):
+        self.engine_Left.change_speed(1.4 * speed)
+        self.engine_Right.change_speed(speed)
+
+    def move_onto_bridge(self, speed):
+        self.engine_Left.change_speed(1.9 * speed)
         self.engine_Right.change_speed(speed)
 
     def turn_left(self, speed):
         self.engine_Left.change_speed_dps(-speed)
         self.engine_Right.change_speed_dps(speed)
 
-    def turn_left_wide(self, speed1, speed2):
-        self.engine_Left.change_speed(speed1)
-        self.engine_Right.change_speed(speed2)
+    def standard_move(self, speed1, speed2):
+        self.engine_Left.change_speed_dps(speed1)
+        self.engine_Right.change_speed_dps(speed2)
 
     def special_right(self):
         # even stilzetten om alles goed te kunnen observeren
-        self.set_duration(3, self.stop_move())
-        self.set_duration(1, self.move_backwards_dps(95))
+        self.set_duration(1, self.stop_move())
+        self.set_duration(1.5, self.move_backwards_dps(95))
         self.set_duration(1, self.turn_right2(345))
         # even stilzetten om alles goed te kunnen observeren
-        self.set_duration(3, self.stop_move())
+        self.set_duration(1, self.stop_move())
         self.set_duration(2, self.move_forward_dps(270, 0.98))
         # even stilzetten om alles goed te kunnen observeren
-        self.set_duration(3, self.stop_move())
+        self.set_duration(1, self.stop_move())
         self.my_IR_Sensor.new_average()
 
     def turn_diagonal_left(self,speed):
         self.engine_Left.change_speed(speed)
-        self.engine_Right.change_speed(1.2 * speed)
+        self.engine_Right.change_speed(speed)
 
     def execute_smooth_turn(self, directionLeft):
-        self.set_duration(2, self.move_backwards_dps(222))
+        self.set_duration(2, self.standard_move(-222, -200))
         self.set_duration(3.5, self.smooth_turn(170, directionLeft))
         # even stilzetten om alles goed te kunnen observeren
-        self.set_duration(3, self.stop_move())
+        self.set_duration(1, self.stop_move())
 
-        
+    def turn_left_second_quadrant(self, directionLeft):
+        self.set_duration(4.6, self.move_backwards_dps(222))
+        self.set_duration(7.5, self.smooth_turn_second_quadrant(170, directionLeft))
+        # even stilzetten om alles goed te kunnen observeren
+        self.set_duration(1, self.stop_move())
+
     def smooth_turn(self, speed, directionLeft):
         if directionLeft:
             self.engine_Left.change_speed_dps(0.5 * speed)
@@ -90,28 +106,35 @@ class Memphis_de_pi:
         elif not directionLeft:
             self.engine_Left.change_speed_dps(speed)
             self.engine_Right.change_speed_dps(0.5 * speed)
-            
-    def move_backwards_dps(self, speed):
-        self.engine_Left.change_speed_dps(-speed)
-        self.engine_Right.change_speed_dps(-speed)
-    
+
+    def smooth_turn_second_quadrant(self, speed, directionLeft):
+        if directionLeft:
+            self.engine_Left.change_speed_dps(0.75 * speed)
+            self.engine_Right.change_speed_dps(speed)
+        elif not directionLeft:
+            self.engine_Left.change_speed_dps(speed)
+            self.engine_Right.change_speed_dps(0.75 * speed)
+
     def stop_move(self):
         self.engine_Left.change_speed(0)
         self.engine_Right.change_speed(0)
 
     def wip_program_execute(self):
         print("inside wip program")
-        self.set_duration(3, self.move_backward(20))
-        self.move_forward(20)
-        while not self.my_Touch_Sensor_Wip.get_signal():
-            self.keep_IR_distance(50)
-        self.set_duration(0.4, self.move_forward(20))
+        # self.set_duration(3, self.move_backward(20))
+        #self.set_duration(1.5, self.move_onto_bridge(25))
+        self.set_duration(1, self.move_forward(20))
+        self.set_duration(0.2, self.move_forward(60))
+        self.stop_move()
+        # while not self.my_Touch_Sensor_Wip.get_signal():
+        #     self.keep_IR_distance(50)
+        # self.set_duration(0.4, self.move_forward(20))
 
-        while not self.my_Color_Sensor.end_quadrant_check():
-            self.move_forward(20)
-            if self.my_Color_Sensor.get_color() == "Red":
+        while not self.my_Touch_Sensor_Front.get_signal():
+            if self.my_Color_Sensor.get_color() == "Red" or self.my_Color_Sensor.get_color() == "Brown":
                 # self.set_duration(1, self.turn_diagonal_left(20))
-                self.turn_diagonal_left(20)
+                self.set_duration(0.5, self.turn_left(30))
+                self.set_duration(0.2, self.move_forward(20))
                 print("Turning diagonal left")
             else:
                 # self.set_duration(1, self.turn_diagonal_right(20))
@@ -119,11 +142,26 @@ class Memphis_de_pi:
                 print("Turning diagonal right")
 
         print("outside of wip loop")
-        self.set_duration(4, self.move_forward(20))
+        self.execute_smooth_turn(True)
+        self.disable_wip = True
+
 
     def keep_IR_distance(self, target_distance):
 
         print("Keep IR distance")
+        # if self.my_IR_Sensor.current_average > (target_distance + 1):
+        #     self.wheel_bias = self.wheel_bias + 0.01
+        #     if self.wheel_bias > 1.1:
+        #         self.wheel_bias = 1.1
+        # elif self.my_IR_Sensor.current_average < (target_distance - 1):
+        #     self.wheel_bias = self.wheel_bias - 0.01
+        #     if self.wheel_bias < 0.95:
+        #         self.wheel_bias = 0.95
+        # elif self.my_IR_Sensor.current_average <= (target_distance + 1) and self.my_IR_Sensor.current_average >= (target_distance - 1):
+        #     self.wheel_bias = 41/40
+        # else:
+        #     pass
+
         if self.my_IR_Sensor.signal >= self.my_IR_Sensor.current_average and self.my_IR_Sensor.signal > (target_distance + 1):
             self.wheel_bias = self.wheel_bias + 0.01
             if self.wheel_bias > 1.1:
@@ -133,7 +171,7 @@ class Memphis_de_pi:
             if self.wheel_bias < 0.95:
                 self.wheel_bias = 0.95
         elif self.my_IR_Sensor.signal <= (target_distance + 1) and self.my_IR_Sensor.signal >= (target_distance - 1):
-            self.wheel_bias = 41/40
+            self.wheel_bias = 1.05
         else:
             pass
 
@@ -146,6 +184,13 @@ class Memphis_de_pi:
         while True:
             self.my_IR_Sensor.average_signal()
             self.check_state()
+            if self.my_Color_Sensor.get_color() == "Black":
+                self.standard_speed = self.standard_speed + 1
+            elif self.my_Color_Sensor.get_color() == "Blue":
+                self.standard_speed = 20
+            if self.my_Color_Sensor.end_quadrant_check() and not self.isInSecondQuadrant and not self.disable_wip:
+                self.isInSecondQuadrant = True
+
 
             # self.keep_IR_distance(15)
             self.move()
@@ -158,36 +203,44 @@ class Memphis_de_pi:
 
         if self.my_IR_Sensor.current_average > 40:
             self.state = "special right"
-            self.wheel_bias = 41/40
+            # self.wheel_bias = 1.055
             print("Special Right")
 
         elif self.my_Touch_Sensor_Front.get_signal():
-            self.set_duration(1,self.move_forward(20))
+            self.set_duration(1,self.move_forward_dps(180, 1.05))
             self.state = "turn left"
-            self.wheel_bias = 41 / 40
+            # self.wheel_bias = 1.055
             print("Turning left")
 
-        elif self.my_Touch_Sensor_Wip.get_signal():
+        elif self.my_Touch_Sensor_Wip.get_signal() and not self.disable_wip:
             self.state = "Wip program"
             print("Wip Sensor is on")
 
         else:
             self.state = "forward"
-            print("Moving forward")
+            # print("Moving forward")
 
     def move(self):
-        if self.state == "turn left":
+        if self.state == "turn left" and not self.isInSecondQuadrant:
             if self.my_IR_Sensor.current_average > 20:
                 self.set_duration(0.5, self.move_backward(20))
-                self.set_duration(1, self.turn_left(180))
+                self.set_duration(1, self.turn_left(174))
             elif self.my_IR_Sensor.current_average <= 20:
                 print("executing smooth turn")
                 self.execute_smooth_turn(True)
             self.my_IR_Sensor.new_average()
+        elif self.state == "turn left" and self.isInSecondQuadrant:
+            if self.my_IR_Sensor.current_average > 20:
+                self.set_duration(1.5, self.move_backward(20))
+                self.set_duration(1, self.turn_left(174))
+            elif self.my_IR_Sensor.current_average <= 20:
+                print("IN SECOND QUADRANT")
+                self.turn_left_second_quadrant(True)
+                self.isInSecondQuadrant = False
         elif self.state == "special right":
             self.special_right()
         elif self.state == "forward":
-            self.move_forward(20)
+            self.move_forward(self.standard_speed)
         elif self.state == "Wip program":
             print("Wip! ")
             self.wip_program_execute()
@@ -196,8 +249,10 @@ class Memphis_de_pi:
 memphis = Memphis_de_pi()
 
 try:
-    # memphis.move_forward(30)
+    # memphis.move_forward(40)
     memphis.my_IR_Sensor.new_average()
+    # print(memphis.my_IR_Sensor.signal)
+    # memphis.my_IR_Sensor.update_signal()
     memphis.manage_move()
     # memphis.my_Color_Sensor.get_color()
 except KeyboardInterrupt:

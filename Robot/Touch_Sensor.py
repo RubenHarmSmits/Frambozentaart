@@ -13,7 +13,7 @@ class Touch_sensor_class:
     def get_signal(self):
         if self.port == 1:
             self.signal = BP.get_sensor(BP.PORT_1)
-            print("FRONT-Touch signal: %s" % (str(self.signal)))
+            # print("FRONT-Touch signal: %s" % (str(self.signal)))
             return self.signal
         elif self.port == 2:
             self.signal = BP.get_sensor(BP.PORT_2)

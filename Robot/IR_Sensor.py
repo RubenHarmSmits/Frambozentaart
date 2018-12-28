@@ -15,10 +15,10 @@ class IR_sensor_class:
     def isTooClose(self):
         self.update_signal()
         if self.signal < 45:
-            print("Infra signal: %s" % (str(self.signal)))
+            # print("Infra signal: %s" % (str(self.signal)))
             return True
         elif self.signal > 44:
-            print("Infra signal: %s" % (str(self.signal)))
+            # print("Infra signal: %s" % (str(self.signal)))
             return False
 
     def save_signal(self):
@@ -27,7 +27,7 @@ class IR_sensor_class:
         self.save_index = self.save_index + 1
         if self.save_index == 10:
             self.save_index = 0
-        print("Signal list: %s" % self.signal_list)
+        # print("Signal list: %s" % self.signal_list)
 
     def average_signal(self):
         self.save_signal()
@@ -41,7 +41,7 @@ class IR_sensor_class:
             i = i+1
 
     def update_signal(self):
-        if BP.get_sensor(BP.PORT_3) < 100:
+        if BP.get_sensor(BP.PORT_3) < 80:
             self.signal = BP.get_sensor(BP.PORT_3)
 
     # def average_IR_to_far(self):

@@ -18,7 +18,7 @@ class Color_sensor_class:
         return self.color[self.value]
 
     def set_color_state(self):
-        print("Inside get color pattern")
+        # print("Inside get color pattern")
         self.get_color()
         if self.color[self.value] == "Brown":
             print("end of wip")
