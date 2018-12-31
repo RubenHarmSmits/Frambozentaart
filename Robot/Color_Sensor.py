@@ -10,6 +10,8 @@ class Color_sensor_class:
         self.color_state = None
         self.save_index = int()
         self.color_list = [0, 0]
+        self.color_end_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.end_list_index = 0
 
     def get_color(self):
         self.color = ["none", "Black", "Blue", "Green", "Yellow", "Red", "White", "Brown"]
@@ -37,9 +39,23 @@ class Color_sensor_class:
             self.color_list[1] = self.color[self.value]
             print("End Quadrant: Black and Red")
             return True
+
         else:
             self.color_list[0] = 0
             self.color_list[1] = 0
-            print("End Quadrant: Other")
+            # print("End Quadrant: Other")
         return False
 
+    def end_parcours(self):
+        if self.get_color() == "Black":
+            self.color_end_list[self.end_list_index] = self.get_color()
+            self.end_list_index = self.end_list_index + 1
+        else:
+            while self.end_list_index > 0:
+                self.color_end_list[self.end_list_index] = 0
+                self.end_list_index = self.end_list_index - 1
+        print(self.color_end_list)
+        if self.end_list_index == 10:
+            print("inside end parcours loop")
+            return True
+        return False

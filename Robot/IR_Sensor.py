@@ -41,7 +41,7 @@ class IR_sensor_class:
             i = i+1
 
     def update_signal(self):
-        if BP.get_sensor(BP.PORT_3) < 80:
+        if BP.get_sensor(BP.PORT_3) < 60:
             self.signal = BP.get_sensor(BP.PORT_3)
 
     # def average_IR_to_far(self):

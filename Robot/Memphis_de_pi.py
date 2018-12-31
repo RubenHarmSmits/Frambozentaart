@@ -1,7 +1,7 @@
 from __future__ import print_function  # use python 3 syntax but make it compatible with python 2
 from __future__ import division  # ''
 
-
+import sys
 import time  # import the time library for the sleep function
 # import brickpi3  # import the BrickPi3 drivers
 from Touch_Sensor import Touch_sensor_class
@@ -94,7 +94,7 @@ class Memphis_de_pi:
         self.set_duration(1, self.stop_move())
 
     def turn_left_second_quadrant(self, directionLeft):
-        self.set_duration(4.6, self.move_backwards_dps(222))
+        self.set_duration(4.6, self.move_backwards_dps(207))
         self.set_duration(7.5, self.smooth_turn_second_quadrant(170, directionLeft))
         # even stilzetten om alles goed te kunnen observeren
         self.set_duration(1, self.stop_move())
@@ -109,11 +109,11 @@ class Memphis_de_pi:
 
     def smooth_turn_second_quadrant(self, speed, directionLeft):
         if directionLeft:
-            self.engine_Left.change_speed_dps(0.75 * speed)
+            self.engine_Left.change_speed_dps(0.80 * speed)
             self.engine_Right.change_speed_dps(speed)
         elif not directionLeft:
             self.engine_Left.change_speed_dps(speed)
-            self.engine_Right.change_speed_dps(0.75 * speed)
+            self.engine_Right.change_speed_dps(0.80 * speed)
 
     def stop_move(self):
         self.engine_Left.change_speed(0)
@@ -123,7 +123,7 @@ class Memphis_de_pi:
         print("inside wip program")
         # self.set_duration(3, self.move_backward(20))
         #self.set_duration(1.5, self.move_onto_bridge(25))
-        self.set_duration(1, self.move_forward(20))
+        self.set_duration(1, self.move_forward(25))
         self.set_duration(0.2, self.move_forward(60))
         self.stop_move()
         # while not self.my_Touch_Sensor_Wip.get_signal():
@@ -142,26 +142,13 @@ class Memphis_de_pi:
                 print("Turning diagonal right")
 
         print("outside of wip loop")
+        self.stop_move()
         self.execute_smooth_turn(True)
         self.disable_wip = True
-
+        self.isInSecondQuadrant = False
 
     def keep_IR_distance(self, target_distance):
-
-        print("Keep IR distance")
-        # if self.my_IR_Sensor.current_average > (target_distance + 1):
-        #     self.wheel_bias = self.wheel_bias + 0.01
-        #     if self.wheel_bias > 1.1:
-        #         self.wheel_bias = 1.1
-        # elif self.my_IR_Sensor.current_average < (target_distance - 1):
-        #     self.wheel_bias = self.wheel_bias - 0.01
-        #     if self.wheel_bias < 0.95:
-        #         self.wheel_bias = 0.95
-        # elif self.my_IR_Sensor.current_average <= (target_distance + 1) and self.my_IR_Sensor.current_average >= (target_distance - 1):
-        #     self.wheel_bias = 41/40
-        # else:
-        #     pass
-
+        # print("Keep IR distance")
         if self.my_IR_Sensor.signal >= self.my_IR_Sensor.current_average and self.my_IR_Sensor.signal > (target_distance + 1):
             self.wheel_bias = self.wheel_bias + 0.01
             if self.wheel_bias > 1.1:
@@ -183,6 +170,7 @@ class Memphis_de_pi:
     def manage_move(self):
         while True:
             self.my_IR_Sensor.average_signal()
+            print("In second quadrant %s:" % self.isInSecondQuadrant)
             self.check_state()
             if self.my_Color_Sensor.get_color() == "Black":
                 self.standard_speed = self.standard_speed + 1
@@ -191,26 +179,29 @@ class Memphis_de_pi:
             if self.my_Color_Sensor.end_quadrant_check() and not self.isInSecondQuadrant and not self.disable_wip:
                 self.isInSecondQuadrant = True
 
-
-            # self.keep_IR_distance(15)
             self.move()
 
             time.sleep(0.02)
-            if self.my_Color_Sensor.end_quadrant_check() and self.my_Color_Sensor.get_color() == "Black":
-                self.stop_move()
+
+            # if self.my_Color_Sensor.end_parcours() and self.my_Touch_Sensor_Front.get_signal():
+            #     self.stop_move()
+            #     print("Stopped")
+            #     break
+            # else:
+            #     pass
 
     def check_state(self):
-
-        if self.my_IR_Sensor.current_average > 40:
+        if self.my_IR_Sensor.current_average > 40 and not self.isInSecondQuadrant:
             self.state = "special right"
-            # self.wheel_bias = 1.055
             print("Special Right")
 
         elif self.my_Touch_Sensor_Front.get_signal():
-            self.set_duration(1,self.move_forward_dps(180, 1.05))
-            self.state = "turn left"
-            # self.wheel_bias = 1.055
-            print("Turning left")
+            if self.my_Color_Sensor.end_quadrant_check() and not self.isInSecondQuadrant:
+                self.state = "end of the parcours"
+            else:
+                self.set_duration(1,self.move_forward_dps(180, 1.05))
+                self.state = "turn left"
+                print("Turning left")
 
         elif self.my_Touch_Sensor_Wip.get_signal() and not self.disable_wip:
             self.state = "Wip program"
@@ -218,7 +209,6 @@ class Memphis_de_pi:
 
         else:
             self.state = "forward"
-            # print("Moving forward")
 
     def move(self):
         if self.state == "turn left" and not self.isInSecondQuadrant:
@@ -230,11 +220,11 @@ class Memphis_de_pi:
                 self.execute_smooth_turn(True)
             self.my_IR_Sensor.new_average()
         elif self.state == "turn left" and self.isInSecondQuadrant:
+            # self.keep_IR_distance(15)
             if self.my_IR_Sensor.current_average > 20:
-                self.set_duration(1.5, self.move_backward(20))
+                self.set_duration(1.5, self.move_backward(15))
                 self.set_duration(1, self.turn_left(174))
             elif self.my_IR_Sensor.current_average <= 20:
-                print("IN SECOND QUADRANT")
                 self.turn_left_second_quadrant(True)
                 self.isInSecondQuadrant = False
         elif self.state == "special right":
@@ -244,17 +234,25 @@ class Memphis_de_pi:
         elif self.state == "Wip program":
             print("Wip! ")
             self.wip_program_execute()
+        elif self.state == "end of the parcours":
+
+            self.set_duration(1, self.move_forward(self.standard_speed))
+            if self.my_Color_Sensor() == "Black":
+                print("STOPPED")
+                sys.exit()
 
 
 memphis = Memphis_de_pi()
 
 try:
+    # while True:
+    #     memphis.my_Color_Sensor.get_color()
     # memphis.move_forward(40)
-    memphis.my_IR_Sensor.new_average()
+    # memphis.my_IR_Sensor.new_average()
     # print(memphis.my_IR_Sensor.signal)
-    # memphis.my_IR_Sensor.update_signal()
+    memphis.my_IR_Sensor.update_signal()
     memphis.manage_move()
-    # memphis.my_Color_Sensor.get_color()
+
 except KeyboardInterrupt:
     memphis.stop_move()
 
